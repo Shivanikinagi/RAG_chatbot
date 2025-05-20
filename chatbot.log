@@ -166,3 +166,5 @@
 2025-05-20 09:16:31,298 - INFO - RAG pipeline setup completed successfully
 2025-05-20 09:16:32,326 - WARNING - From C:\Users\shivani\anaconda3\Lib\site-packages\keras\src\backend\common\global_state.py:82: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
 
+2025-05-20 09:16:57,509 - INFO - Successfully answered question: tell me about lion...
+2025-05-20 09:16:57,513 - INFO - Responses saved to chatbot_responses.txt
