@@ -8,7 +8,11 @@
 import sys
 if sys.version_info >= (3, 13):
     sys.stderr.write("Warning: Python 3.13 may cause installation issues\n")
-    
+
+import os
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'  # Disables oneDNN warnings
+os.environ['NO_CUDA'] = '1'
+
 import pandas as pd
 from langchain_community.document_loaders import CSVLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
