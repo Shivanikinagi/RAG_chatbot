@@ -1,15 +1,1 @@
-# Core
-langchain==0.1.0
-langchain-community==0.0.11
-streamlit==1.29.0
-
-# Hugging Face 
-transformers==4.36.2
-sentence-transformers==2.2.2
-datasets==2.14.6
-
-# Vector DB 
-faiss-cpu==1.7.4
-
-pandas==2.0.3
-numpy==1.24.3
+pandas==2.2.2 langchain==0.2.0 faiss-cpu==1.8.0 transformers==4.41.0 sentence-transformers==2.7.0 streamlit==1.35.0
