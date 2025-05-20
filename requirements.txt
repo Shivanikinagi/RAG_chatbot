@@ -5,18 +5,11 @@ streamlit==1.29.0
 
 # Hugging Face 
 transformers==4.36.2
-sentence-transformers==2.2.2 --no-deps 
+sentence-transformers==2.2.2
 datasets==2.14.6
 
-<<<<<<< HEAD
 # Vector DB 
-faiss-cpu==1.7.4 --only-binary=:all: 
+faiss-cpu==1.7.4
 
-=======
-# Vector DB (pre-built wheel)
-faiss-cpu==1.7.4 --only-binary=:all: 
-
-# Essentials
->>>>>>> 8b23340aa9999fb42f4d524fea6e0ac0bd27879b
 pandas==2.0.3
 numpy==1.24.3
