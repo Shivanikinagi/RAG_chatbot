@@ -1,0 +1,22 @@
+Question: tell me about lion
+Answer: a large carnivorous mammal known for its strength and social behavior, living in prides
+Sources:
+1. name: Lion
+description: The lion is a large carnivorous mammal known for its strength and social behavior, living in prides.
+habitat: Savannas and grasslands of Africa
+diet: Carnivore: eats antelopes, zebras, and other mammals
+Timestamp: 2025-05-20 09:11:33
+--------------------------------------------------------------------------------
+Question: tell me about tiger
+Answer: I don't know
+Timestamp: 2025-05-20 09:11:47
+--------------------------------------------------------------------------------
+Question: tell me about eagle
+Answer: a bird of prey with a white head and sharp beak
+Sources:
+1. name: Bald Eagle
+description: The bald eagle is a bird of prey with a white head and sharp beak, symbolizing strength.
+habitat: Forests and coasts near rivers or lakes in North America
+diet: Carnivore: eats fish, small mammals, and birds
+Timestamp: 2025-05-20 09:12:04
+--------------------------------------------------------------------------------
