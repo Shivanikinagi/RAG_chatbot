@@ -158,3 +158,11 @@
 2025-05-20 09:11:47,138 - INFO - Responses saved to chatbot_responses.txt
 2025-05-20 09:12:04,142 - INFO - Successfully answered question: tell me about eagle...
 2025-05-20 09:12:04,149 - INFO - Responses saved to chatbot_responses.txt
+2025-05-20 09:16:24,952 - INFO - Initializing RAGChatbot with model google/flan-t5-small
+2025-05-20 09:16:25,004 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-05-20 09:16:29,591 - INFO - Loaded and split 4 document chunks
+2025-05-20 09:16:29,730 - INFO - Loading faiss with AVX2 support.
+2025-05-20 09:16:29,758 - INFO - Successfully loaded faiss with AVX2 support.
+2025-05-20 09:16:31,298 - INFO - RAG pipeline setup completed successfully
+2025-05-20 09:16:32,326 - WARNING - From C:\Users\shivani\anaconda3\Lib\site-packages\keras\src\backend\common\global_state.py:82: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+
