@@ -8,7 +8,11 @@
 import sys
 if sys.version_info >= (3, 13):
     sys.stderr.write("Warning: Python 3.13 may cause installation issues\n")
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 8b23340aa9999fb42f4d524fea6e0ac0bd27879b
 import pandas as pd
 from langchain_community.document_loaders import CSVLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
