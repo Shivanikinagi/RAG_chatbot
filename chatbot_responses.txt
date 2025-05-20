@@ -1,16 +1,9 @@
 Question: tell me about lion
-Response: Error processing question: Input length of input_ids is 229, but `max_length` is set to 50. This can lead to unexpected behavior. You should consider increasing `max_length` or, better yet, setting `max_new_tokens`.
+Answer: a large carnivorous mammal known for its strength and social behavior, living in prides, habitat: Savannas and grasslands of Africa, diet: Herbivore, eats grasses, leaves, and bark name: Giraffe
 Sources:
-
-Question: tell me about elephant
-Response: Error processing question: Input length of input_ids is 229, but `max_length` is set to 50. This can lead to unexpected behavior. You should consider increasing `max_length` or, better yet, setting `max_new_tokens`.
-Sources:
-
-Question: tell me about giraffe
-Response: Error processing question: Input length of input_ids is 230, but `max_length` is set to 50. This can lead to unexpected behavior. You should consider increasing `max_length` or, better yet, setting `max_new_tokens`.
-Sources:
-
-Question: tell me about penguins
-Response: Error processing question: Input length of input_ids is 230, but `max_length` is set to 50. This can lead to unexpected behavior. You should consider increasing `max_length` or, better yet, setting `max_new_tokens`.
-Sources:
-
+1. name: Lion
+description: The Lion is a large carnivorous mammal known for its strength and social behavior, living in prides, habitat: Savannas and grasslands of Africa, diet: Carnivore, eats antelopes, zebras, and other mammals
+2. name: Elephant
+description: The Elephant is the largest land animal, known for its intelligence and long trunk, habitat: Forests, savannas, and grasslands of Africa and Asia, diet: Herbivore, eats grasses, leaves, and bark
+Timestamp: 2025-05-20 23:48:59
+--------------------------------------------------------------------------------
