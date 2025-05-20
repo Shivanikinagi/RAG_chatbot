@@ -1,28 +1,16 @@
-Question: What is the habitat of lions?
-Answer: savannas and grasslands of Africa
-Timestamp: 2025-05-20 09:34:25
---------------------------------------------------------------------------------
-Question: What do elephants eat?
-Answer: antelopes, zebras, and other mammals
-Timestamp: 2025-05-20 09:34:39
---------------------------------------------------------------------------------
-Question: How long do bald eagles live in the wild
-Answer: I don't know
-Timestamp: 2025-05-20 09:34:51
---------------------------------------------------------------------------------
-Question: Describe the social behavior of wolves.
-Answer: I don't know
-Timestamp: 2025-05-20 09:35:04
---------------------------------------------------------------------------------
-Question: Where can blue whales be found?
-Answer: Oceans worldwide
-Timestamp: 2025-05-20 09:36:02
---------------------------------------------------------------------------------
-Question: What is special about bald eagles?
-Answer: a bird of prey with a white head and sharp beak
-Timestamp: 2025-05-20 09:36:13
---------------------------------------------------------------------------------
-Question: Are lions social animals?
-Answer: a large carnivorous mammal known for its strength and social behavior, living in prides
-Timestamp: 2025-05-20 09:36:24
---------------------------------------------------------------------------------
+Question: tell me about lion
+Response: Error processing question: Input length of input_ids is 229, but `max_length` is set to 50. This can lead to unexpected behavior. You should consider increasing `max_length` or, better yet, setting `max_new_tokens`.
+Sources:
+
+Question: tell me about elephant
+Response: Error processing question: Input length of input_ids is 229, but `max_length` is set to 50. This can lead to unexpected behavior. You should consider increasing `max_length` or, better yet, setting `max_new_tokens`.
+Sources:
+
+Question: tell me about giraffe
+Response: Error processing question: Input length of input_ids is 230, but `max_length` is set to 50. This can lead to unexpected behavior. You should consider increasing `max_length` or, better yet, setting `max_new_tokens`.
+Sources:
+
+Question: tell me about penguins
+Response: Error processing question: Input length of input_ids is 230, but `max_length` is set to 50. This can lead to unexpected behavior. You should consider increasing `max_length` or, better yet, setting `max_new_tokens`.
+Sources:
+
