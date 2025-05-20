@@ -5,6 +5,10 @@
 4. FLAN-T5 Model - https://huggingface.co/google/flan-t5-small
 5. Sentence Transformers - https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
 '''
+import sys
+if sys.version_info >= (3, 13):
+    sys.stderr.write("Warning: Python 3.13 may cause installation issues\n")
+
 import pandas as pd
 from langchain_community.document_loaders import CSVLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
