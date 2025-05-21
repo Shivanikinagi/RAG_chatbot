@@ -6,7 +6,6 @@
 5. Sentence Transformers - https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
 """
 
-
 import pandas as pd
 import os
 import streamlit as st
@@ -18,9 +17,6 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import CSVLoader
-import logging
-
-
 
 # Configure logging
 logging.basicConfig(
@@ -48,7 +44,7 @@ except ImportError as e:
     from langchain_community.embeddings import HuggingFaceEmbeddings
     from langchain_community.llms import HuggingFacePipeline
     logger.info("FAISS installed and imported successfully")
-    
+
 class RAGChatbot:
     """A RAG-based chatbot for answering questions about animals.
     
@@ -104,7 +100,6 @@ class RAGChatbot:
         """Set up the RAG pipeline with embeddings, vector store, and LLM."""
         try:
             # Using sentence-transformers for embeddings
-            # Model: all-MiniLM-L6-v2 (https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
             embeddings = HuggingFaceEmbeddings(
                 model_name="sentence-transformers/all-MiniLM-L6-v2",
                 model_kwargs={'device': 'cpu'}
@@ -115,7 +110,6 @@ class RAGChatbot:
             
             try:
                 # Initialize Hugging Face model pipeline
-                # Base model: google/flan-t5-small
                 tokenizer = AutoTokenizer.from_pretrained(self.model_name)
                 model = AutoModelForSeq2SeqLM.from_pretrained(self.model_name)
                 
@@ -135,12 +129,12 @@ class RAGChatbot:
                 logger.error(f"Error loading model: {str(model_error)}")
                 raise        
             
-            prompt_template = """Answer the question based strictly on the context.
-            If the answer isn't in the context, say "I don't know."
-            Don't mention animals not in the context.
-            
+            prompt_template = """Based on the following context, answer the question about the animal.
+            If the question is about diet, focus on what the animal eats. If the question is about habitat, focus on where the animal lives.
+            Format the response in a clear way.
+
             Context: {context}
-            
+
             Question: {question}
             Answer: """
             
@@ -152,7 +146,7 @@ class RAGChatbot:
             self.qa_chain = RetrievalQA.from_chain_type(
                 llm=llm,
                 chain_type="stuff",
-                retriever=self.vector_store.as_retriever(search_kwargs={"k": 3}),
+                retriever=self.vector_store.as_retriever(search_kwargs={"k": 1}),
                 return_source_documents=True,
                 chain_type_kwargs={"prompt": prompt}
             )
@@ -162,48 +156,74 @@ class RAGChatbot:
             raise
 
     def ask_question(self, question: str) -> dict:
-        """
-        Answer a user question using the RAG pipeline.
-        
-        Args:
-            question (str): The user's question
-            
-        Returns:
-            dict: Contains question, answer, sources and timestamp
-        """
+        """Answer a question about animals, handling diet and location queries."""
         try:
             if not self.qa_chain:
-                raise ValueError("RAG pipeline not initialized. Call setup_rag_pipeline first.")
+                raise ValueError("RAG pipeline not initialized.")
             
-            result = self.qa_chain({"query": question})
-            answer = result["result"]
+            question = question.strip().lower()
+            is_location_question = "where" in question
+            is_diet_question = any(word in question for word in ["diet", "eat", "food"])
+            # Check for singular and plural forms
+            animal = None
+            for singular, plural in [("lion", "lions"), ("elephant", "elephants"), ("giraffe", "giraffes")]:
+                if singular in question or plural in question:
+                    animal = singular
+                    break
             
-            # Filter sources to only include relevant ones
-            sources = []
-            question_keywords = [word.lower() for word in question.split() if len(word) > 3]
-            for doc in result["source_documents"]:
-                doc_text = doc.page_content.lower()
-                if any(keyword in doc_text for keyword in question_keywords):
-                    sources.append(doc.page_content)
+            logger.info(f"Detected animal: {animal}, is_location_question: {is_location_question}, is_diet_question: {is_diet_question}")
             
-            # If answer mentions a different animal than asked, correct it
-            if "i don't know" not in answer.lower():
-                question_animal = next((kw for kw in question_keywords if kw in ["lion", "tiger", "elephant"]), None)
-                if question_animal:
-                    answer_animals = [kw for kw in ["lion", "tiger", "elephant"] if kw in answer.lower()]
-                    if answer_animals and question_animal not in answer_animals:
-                        answer = "I don't know about that animal, but I found information about other animals."
-                        sources = []  # Clear sources since they're not relevant
-            
-            response = {
-                "question": question,
-                "answer": answer,
-                "sources": sources,
-                "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            }
-            self.responses.append(response)
-            logger.info(f"Successfully answered question: {question[:50]}...")
-            return response
+            if animal:
+                if is_diet_question:
+                    result = self.qa_chain({"query": f"What does the {animal} eat? What is its diet?"})
+                    sources = []
+                    for doc in result["source_documents"]:
+                        if animal in doc.page_content.lower():
+                            try:
+                                diet_info = doc.page_content.split("diet:")[1].split(",")[0].strip()
+                                sources.append(f"{animal.title()}'s diet: {diet_info}")
+                            except IndexError:
+                                sources.append(doc.page_content)
+                    answer = next((s.split("diet:")[1].split(",")[0].strip() 
+                                 for s in sources if "diet:" in s), result["result"])
+                
+                elif is_location_question:
+                    result = self.qa_chain({"query": f"Where does the {animal} live? What is its habitat?"})
+                    sources = []
+                    for doc in result["source_documents"]:
+                        if animal in doc.page_content.lower():
+                            try:
+                                habitat_info = doc.page_content.split("habitat:")[1].split(",")[0].strip()
+                                sources.append(f"{animal.title()}'s habitat: {habitat_info}")
+                            except IndexError:
+                                sources.append(doc.page_content)
+                    answer = next((s.split("habitat:")[1].split(",")[0].strip() 
+                                 for s in sources if "habitat:" in s), result["result"])
+                
+                else:
+                    result = self.qa_chain({"query": f"Tell me about the {animal}."})
+                    sources = [doc.page_content for doc in result["source_documents"] 
+                              if animal in doc.page_content.lower()]
+                    answer = result["result"]
+                
+                response = {
+                    "question": question,
+                    "answer": answer,
+                    "sources": sources,
+                    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                }
+                self.responses.append(response)
+                logger.info(f"Successfully answered question about {animal}'s {'habitat' if is_location_question else 'diet' if is_diet_question else 'information'}")
+                return response
+            else:
+                response = {
+                    "question": question,
+                    "answer": "Please ask about specific animals in our database: lion, elephant, or giraffe.",
+                    "sources": [],
+                    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                }
+                logger.info("No valid animal detected in question")
+                return response
         except Exception as e:
             logger.error(f"Error answering question: {str(e)}")
             return {
@@ -259,6 +279,12 @@ def main():
     st.title("🦁 RAG Chatbot - Animal Knowledge Base")
     st.write("Ask questions about animals, and I'll answer based on my knowledge!")
     
+    # Add reset button to clear cache
+    if st.button("Reset Chatbot"):
+        st.cache_resource.clear()
+        st.session_state.rag_setup = False
+        st.rerun()
+    
     try:
         chatbot = init_chatbot(data_file)
         
@@ -273,7 +299,7 @@ def main():
             if question:
                 with st.spinner("Thinking..."):
                     response = chatbot.ask_question(question)
-                    
+                    print(response)  # Debug to console
                     st.write("---")
                     st.write(f"**Q:** {response['question']}")
                     st.write(f"**A:** {response['answer']}")

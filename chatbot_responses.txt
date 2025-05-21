@@ -1,9 +1,26 @@
 Question: tell me about lion
-Answer: a large carnivorous mammal known for its strength and social behavior, living in prides, habitat: Savannas and grasslands of Africa, diet: Herbivore, eats grasses, leaves, and bark name: Giraffe
+Answer: a large carnivorous mammal known for its strength and social behavior, living in prides, habitat: Savannas and grasslands of Africa, diet: Carnivore, eats antelopes, zebras, and other mammals
 Sources:
 1. name: Lion
 description: The Lion is a large carnivorous mammal known for its strength and social behavior, living in prides, habitat: Savannas and grasslands of Africa, diet: Carnivore, eats antelopes, zebras, and other mammals
-2. name: Elephant
+Timestamp: 2025-05-21 21:48:57
+--------------------------------------------------------------------------------
+Question: where do giraffes live
+Answer: Savannas and grasslands of Africa
+Sources:
+1. Giraffe's habitat: Savannas and grasslands of Africa
+Timestamp: 2025-05-21 21:49:10
+--------------------------------------------------------------------------------
+Question: what is the diet of lions?
+Answer: Carnivore
+Sources:
+1. Lion's diet: Carnivore
+Timestamp: 2025-05-21 21:49:39
+--------------------------------------------------------------------------------
+Question: what is the habitat of elephant
+Answer: The elephant is the largest land animal, known for its intelligence and long trunk, habitat: Forests, savannas, and grasslands of Africa and Asia, diet: Herbivore, eats grasses, leaves, and bark
+Sources:
+1. name: Elephant
 description: The Elephant is the largest land animal, known for its intelligence and long trunk, habitat: Forests, savannas, and grasslands of Africa and Asia, diet: Herbivore, eats grasses, leaves, and bark
-Timestamp: 2025-05-20 23:48:59
+Timestamp: 2025-05-21 21:50:47
 --------------------------------------------------------------------------------
